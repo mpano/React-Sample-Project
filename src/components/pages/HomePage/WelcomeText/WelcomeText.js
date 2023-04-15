@@ -1,5 +1,5 @@
 import React from 'react';
-import {Jumbotron} from 'react-bootstrap'
+import { Jumbotron } from 'react-bootstrap';
 
 class WelcomeText extends React.Component {
     render() {
@@ -7,8 +7,8 @@ class WelcomeText extends React.Component {
             <Jumbotron className="text-center">
                 <h1>Welcome back {this.props.username}!</h1>
             </Jumbotron>
-        )
+        );
     }
 }
 
-export default WelcomeText
+export default WelcomeText;

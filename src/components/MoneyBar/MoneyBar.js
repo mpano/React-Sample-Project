@@ -17,6 +17,10 @@ const mapDispatchToProps = dispatch => ({
     currenciesUptodate: () => dispatch(currenciesUptodate),
 })
 
+function formatNumber(number) {
+    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
 class MoneyBar extends React.Component {
 
     constructor(props) {
@@ -78,10 +82,13 @@ class MoneyBar extends React.Component {
             return <AlertBar barMessage={'Possessions make you rich? Your richness is life, forever.'} />
         } else {
             const barMessage = Object.keys(this.state.ownedCurrencies).map((keyName, index, array) => (
-                <NumberFormat key={keyName} value={this.state.ownedCurrencies[keyName]} displayType={'text'} thousandSeparator={true}
-                    suffix={" " + keyName + ((array.length - 1) != index ? ", " : ".")} />))
+                <span key={keyName}>
+          {formatNumber(this.state.ownedCurrencies[keyName])} {keyName}
+                    {array.length - 1 !== index ? ', ' : '.'}
+        </span>
+            ));
 
-            return <AlertBar prefix={'You have'} barMessage={barMessage} />
+            return <AlertBar prefix={'You have'} barMessage={barMessage} />;
         }
     }
 }

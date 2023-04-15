@@ -3,7 +3,7 @@ const HtmlWebPackPlugin = require("html-webpack-plugin");
 
 module.exports = {
     entry: './src/app.js',
-    devtool: 'sourcemaps',
+    devtool: 'eval-cheap-source-map',
     cache: true,
     mode: 'development',
     output: {
@@ -11,7 +11,9 @@ module.exports = {
         filename: './dist/bundle.js'
     },
     devServer: {
-        contentBase: path.join(__dirname, 'dist'),
+        static: {
+            directory: path.join(__dirname, 'public'),
+        },
         hot: true,
         port: 3000,
         historyApiFallback: true
@@ -28,10 +30,7 @@ module.exports = {
             }]
         }, {
             test: /\.css$/,
-            loaders: [
-                'style-loader',
-                'css-loader'
-            ]
+            use: ["style-loader", "css-loader"]
         }]
     }
 };
